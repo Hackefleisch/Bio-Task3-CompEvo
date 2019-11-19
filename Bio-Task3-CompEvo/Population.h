@@ -7,6 +7,7 @@
 class Population{
 public:
 	Population(int wordCount, int wordLength, int in_popSize, std::mt19937* in_rng, std::uniform_real_distribution<float>* in_rnd);
+	Population(const Population prePop, float crossOverRate, float mutationRate);
 	Population() = delete;
 	const Individual& GetIndividual(int index) const;
 private:
@@ -14,5 +15,6 @@ private:
 	int popSize;
 	std::mt19937* rng;
 	std::uniform_real_distribution<float>* rnd;
+	float totalFitness = 0.0f;
 };
 
