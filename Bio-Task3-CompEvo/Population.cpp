@@ -8,10 +8,16 @@ Population::Population(int wordCount, int wordLength, int in_popSize, std::mt199
 	rng = in_rng;
 	rnd = in_rnd;
 
+	pop.reserve(popSize);
+
 	for(int i = 0; i < popSize; i++){
 		pop.emplace_back(wordCount, wordLength, rng, rnd);
 	}
 
+}
+
+const Individual& Population::GetIndividual(int index) const{
+	return pop.at(index);
 }
 
 
