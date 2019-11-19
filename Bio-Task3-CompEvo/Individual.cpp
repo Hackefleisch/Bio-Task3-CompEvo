@@ -32,7 +32,7 @@ Individual::Individual(int in_wordCount, int in_wordLength, std::mt19937* in_rng
 
 }
 
-Individual::Individual(const Individual parent1, const Individual parent2, float crossOverRate, float mutationRate, bool copyFromParent1){
+Individual::Individual(const Individual& parent1, const Individual& parent2, float crossOverRate, float mutationRate, bool copyFromParent1){
 	assert(parent1.wordCount == parent2.wordCount);
 	assert(parent1.wordLength == parent2.wordLength);
 
