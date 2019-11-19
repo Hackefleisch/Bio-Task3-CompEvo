@@ -1,5 +1,6 @@
 #include "Individual.h"
 #include <math.h>
+#include <assert.h>
 
 
 
@@ -9,6 +10,8 @@ Individual::Individual(int in_wordCount, int in_wordLength, std::mt19937* in_rng
 	rnd = in_rnd;
 	wordCount = in_wordCount;
 	wordLength = in_wordLength;
+
+	dna.reserve(wordCount*wordLength);
 
 	for(int i = 0; i < wordCount*wordLength; i++){
 		float randomNum = (*rnd)(*rng);
@@ -22,6 +25,46 @@ Individual::Individual(int in_wordCount, int in_wordLength, std::mt19937* in_rng
 
 		}
 
+	}
+
+	CalcGenes();
+	CalcFitness();
+
+}
+
+Individual::Individual(Individual parent1, Individual parent2, float crossOverRate, float mutationRate){
+	assert(parent1.wordCount == parent2.wordCount);
+	assert(parent1.wordLength == parent2.wordLength);
+
+	rng = parent1.rng;
+	rnd = parent1.rnd;
+	wordCount = parent1.wordCount;
+	wordLength = parent1.wordLength;
+
+	dna.reserve(wordCount*wordLength);
+
+	bool copyFromParent1 = true;
+	float randomNum = (*rnd)(*rng);
+	if(randomNum < 0.5f){
+		copyFromParent1 = !copyFromParent1;
+	}
+
+	for(int i = 0; i < wordCount*wordLength; i++){
+		randomNum = (*rnd)(*rng);
+		if(randomNum < crossOverRate){
+			copyFromParent1 = !copyFromParent1;
+		}
+
+		if(copyFromParent1){
+			dna.push_back(parent1.dna.at(i));
+		} else{
+			dna.push_back(parent2.dna.at(i));
+		}
+
+		randomNum = (*rnd)(*rng);
+		if(randomNum < mutationRate){
+			dna.at(i) = !dna.at(i);
+		}
 	}
 
 	CalcGenes();
@@ -43,6 +86,8 @@ std::string Individual::GetDescription() const{
 }
 
 void Individual::CalcGenes(){
+
+	genes.reserve(wordCount);
 
 	for(int i = 0; i < wordCount; i++){
 		int gene = 0;
