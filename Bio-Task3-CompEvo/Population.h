@@ -11,6 +11,7 @@ public:
 	Population() = delete;
 	const Individual& GetIndividual(int index) const;
 	void PrintReport() const;
+	const Individual& GetBestIndividual() const;
 private:
 	std::vector<Individual> pop;
 	unsigned int popSize;

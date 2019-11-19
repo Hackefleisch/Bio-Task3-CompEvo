@@ -82,4 +82,8 @@ void Population::PrintReport() const{
 
 }
 
+const Individual & Population::GetBestIndividual() const{
+	return pop.at(bestIndividualIndex);
+}
+
 

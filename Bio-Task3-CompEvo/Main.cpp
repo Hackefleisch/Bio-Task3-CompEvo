@@ -9,13 +9,20 @@ int main(){
 	std::random_device rd;
 	std::mt19937 rng(rd());
 	std::uniform_real_distribution<float> rnd(0.0f, 1.0f);
-	
-	Population pop(5, 6, 100, &rng, &rnd);
-	pop.PrintReport();
-	Population pop2(pop, 0.02f, 0.033333f);
-	pop2.PrintReport();
-	Population pop3(pop2, 0.02f, 0.033333f);
-	pop3.PrintReport();
+
+	float crossoverRate = 1.0f / 1000;
+	float mutationRate = 1.0f / 3000;
+
+	Population oldPop(5, 6, 100, &rng, &rnd);
+	Population currentPop(oldPop, crossoverRate, mutationRate);
+	for(int i = 0; i < 100; i++){
+		oldPop.PrintReport();
+		if(oldPop.GetBestIndividual().GetFitness() == 24.0f){
+			break;
+		}
+		oldPop = currentPop;
+		currentPop = Population(oldPop, crossoverRate, mutationRate);
+	}
 
 	system("pause");
 	return 0;
