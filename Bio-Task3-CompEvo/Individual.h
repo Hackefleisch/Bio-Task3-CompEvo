@@ -7,8 +7,9 @@
 class Individual{
 public:
 	Individual(int in_wordCount, int in_wordLength, std::mt19937* in_rng, std::uniform_real_distribution<float>* in_rnd);
-	Individual(Individual parent1, Individual parent2, float crossOverRate, float mutationRate);
+	Individual(const Individual parent1, const Individual parent2, float crossOverRate, float mutationRate, bool copyFromParent1);
 	Individual() = delete;
+	bool operator<(const Individual& rhs) const;
 	float GetFitness() const;
 	std::string GetDescription() const;
 private:

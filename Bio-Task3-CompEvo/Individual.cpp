@@ -32,7 +32,7 @@ Individual::Individual(int in_wordCount, int in_wordLength, std::mt19937* in_rng
 
 }
 
-Individual::Individual(Individual parent1, Individual parent2, float crossOverRate, float mutationRate){
+Individual::Individual(const Individual parent1, const Individual parent2, float crossOverRate, float mutationRate, bool copyFromParent1){
 	assert(parent1.wordCount == parent2.wordCount);
 	assert(parent1.wordLength == parent2.wordLength);
 
@@ -43,14 +43,8 @@ Individual::Individual(Individual parent1, Individual parent2, float crossOverRa
 
 	dna.reserve(wordCount*wordLength);
 
-	bool copyFromParent1 = true;
-	float randomNum = (*rnd)(*rng);
-	if(randomNum < 0.5f){
-		copyFromParent1 = !copyFromParent1;
-	}
-
 	for(int i = 0; i < wordCount*wordLength; i++){
-		randomNum = (*rnd)(*rng);
+		float randomNum = (*rnd)(*rng);
 		if(randomNum < crossOverRate){
 			copyFromParent1 = !copyFromParent1;
 		}
@@ -70,6 +64,10 @@ Individual::Individual(Individual parent1, Individual parent2, float crossOverRa
 	CalcGenes();
 	CalcFitness();
 
+}
+
+bool Individual::operator<(const Individual& rhs) const{
+	return fitness < rhs.fitness;
 }
 
 float Individual::GetFitness() const{
