@@ -85,7 +85,7 @@ std::string Individual::GetID() const{
 	for(int g : genes){
 		str += std::to_string(g) + "-";
 	}
-	return std::string();
+	return str;
 }
 
 void Individual::CalcGenes(){
