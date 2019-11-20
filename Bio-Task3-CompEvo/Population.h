@@ -13,8 +13,9 @@ public:
 	const Individual& GetIndividual(int index) const;
 	void PrintReport() const;
 	const Individual& GetBestIndividual() const;
-	std::map<std::string, int>& SpeciesCount() const;
+	std::map<std::string, int> SpeciesCount() const;
 	int GetPopSize() const;
+	float GetTotalFitness() const;
 private:
 	std::vector<Individual> pop;
 	unsigned int popSize;

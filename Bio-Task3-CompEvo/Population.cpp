@@ -86,7 +86,7 @@ const Individual & Population::GetBestIndividual() const{
 	return pop.at(bestIndividualIndex);
 }
 
-std::map<std::string, int>& Population::SpeciesCount() const{
+std::map<std::string, int> Population::SpeciesCount() const{
 	std::map<std::string, int> count;
 
 	for(const Individual& i : pop){
@@ -102,6 +102,10 @@ std::map<std::string, int>& Population::SpeciesCount() const{
 
 int Population::GetPopSize() const{
 	return popSize;
+}
+
+float Population::GetTotalFitness() const{
+	return totalFitness;
 }
 
 
