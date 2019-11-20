@@ -100,4 +100,8 @@ std::map<std::string, int>& Population::SpeciesCount() const{
 	return count;
 }
 
+int Population::GetPopSize() const{
+	return popSize;
+}
+
 
