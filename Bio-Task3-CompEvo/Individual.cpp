@@ -75,12 +75,17 @@ float Individual::GetFitness() const{
 }
 
 std::string Individual::GetDescription() const{
+	std::string str = GetID();
+	str += ": " + std::to_string(fitness);
+	return str;
+}
+
+std::string Individual::GetID() const{
 	std::string str = "";
 	for(int g : genes){
-		str += std::to_string(g) + " ";
+		str += std::to_string(g) + "-";
 	}
-	str += "- " + std::to_string(fitness);
-	return str;
+	return std::string();
 }
 
 void Individual::CalcGenes(){

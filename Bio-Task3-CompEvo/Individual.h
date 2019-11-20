@@ -12,6 +12,7 @@ public:
 	bool operator<(const Individual& rhs) const;
 	float GetFitness() const;
 	std::string GetDescription() const;
+	std::string GetID() const;
 private:
 	void CalcGenes();
 	void CalcFitness();
