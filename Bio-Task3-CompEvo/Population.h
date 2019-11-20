@@ -3,6 +3,7 @@
 #include "Individual.h"
 
 #include <vector>
+#include <map>
 
 class Population{
 public:
@@ -12,6 +13,7 @@ public:
 	const Individual& GetIndividual(int index) const;
 	void PrintReport() const;
 	const Individual& GetBestIndividual() const;
+	std::map<std::string, int>& SpeciesCount() const;
 private:
 	std::vector<Individual> pop;
 	unsigned int popSize;

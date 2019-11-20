@@ -86,4 +86,18 @@ const Individual & Population::GetBestIndividual() const{
 	return pop.at(bestIndividualIndex);
 }
 
+std::map<std::string, int>& Population::SpeciesCount() const{
+	std::map<std::string, int> count;
+
+	for(const Individual& i : pop){
+		std::string id = i.GetID();
+		if(count.find(id) == count.end()){
+			count.insert(std::pair<std::string, int>(id, 0));
+		}
+		count[id] += 1;
+	}
+
+	return count;
+}
+
 
